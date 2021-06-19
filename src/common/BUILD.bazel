@@ -9,5 +9,6 @@ proto_library(
 
 cc_proto_library(
     name = "directory_cc_proto",
-    deps = [":directory_proto"]
+    deps = [":directory_proto"],
+    visibility = ["//visibility:public"]
 )
