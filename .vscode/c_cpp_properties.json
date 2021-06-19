@@ -1,8 +1,24 @@
 {
     "configurations": [
         {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/bazel-directory-db/**",
+                "${workspaceFolder}/bazel-directory-db/external/boost/**",
+                "${workspaceFolder}/bazel-directory-db/external/com_google_googletest/googlemock/include/**",
+                "${workspaceFolder}/bazel-directory-db/external/com_google_googletest/googletest/include/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
             "name": "Mac",
             "includePath": [
+                "${workspaceFolder}/bazel-directory-db/**",
                 "${workspaceFolder}/bazel-directory-db/external/boost/**",
                 "${workspaceFolder}/bazel-directory-db/external/com_google_googletest/googlemock/include/**",
                 "${workspaceFolder}/bazel-directory-db/external/com_google_googletest/googletest/include/**",
