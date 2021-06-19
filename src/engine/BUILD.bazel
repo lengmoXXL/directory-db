@@ -1,1 +1,14 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
+
+
+cc_library(
+    name = "table_builder",
+    srcs = [
+        "table_builder.cc",
+        "table_builder.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/common:directory_cc_proto",
+    ]
+)
