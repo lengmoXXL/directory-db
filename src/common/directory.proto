@@ -1,5 +1,0 @@
-package directory_db;
-
-message Path {
-    repeated string parts = 1;
-}

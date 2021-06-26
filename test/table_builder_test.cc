@@ -1,17 +1,9 @@
 #include "gtest/gtest.h"
 
 #include "src/engine/table_builder.h"
+#include "src/common/data_model.h"
 
 namespace directory_db {
-
-Path MakePath(const std::vector<std::string> &parts)
-{
-    Path ret;
-    for (const std::string &part: parts) {
-        ret.add_parts(part);
-    }
-    return ret;
-}
 
 TEST(TableBuilderTest, InsertItem)
 {

@@ -20,10 +20,21 @@ cc_test(
 )
 
 cc_test(
-    name = "common_test",
-    srcs = ["common_test.cc"],
+    name = "flare_test",
+    srcs = ["flare_test.cc"],
     deps = [
-        "//src/common:directory_cc_proto",
+        "//src/common:data_model",
+        "@com_google_googletest//:gtest_main",
+        "@boost//:asio",
+    ]
+)
+
+cc_test(
+    name = "table_test",
+    srcs = ["table_test.cc"],
+    deps = [
+        "//src/engine:table",
+        "//src/engine:table_builder",
         "@com_google_googletest//:gtest_main",
     ]
 )

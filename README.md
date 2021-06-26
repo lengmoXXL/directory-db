@@ -25,11 +25,11 @@ prefix semantics
 
 # TodoList
 
- * [ ] TableBuilder: used to flush memtable into table
- * [ ] Table: ordered readonly key value set, associated to the table
+ * [x] TableBuilder: used to flush memtable into table
+ * [x] Table: ordered readonly key value set, associated to the table
+ * [ ] TableSet: compact TableSets into a TableSet
  * [ ] Iterator: Iterate memtable and Table
  * [ ] VersionEdit: flush tables to create a version edit
- * [ ] Version: compact VersionEdit into a VersionSet
 
 # How to Start
 

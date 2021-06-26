@@ -24,25 +24,25 @@ TableBuilder &TableBuilder::SetLocation(const std::string &fs_path)
 
 TableBuilder &TableBuilder::SetMemtable(const Memtable &table)
 {
+    DirectoryDataBasePB db;
     for (const auto &p: table) {
-        if (!p.first.SerializePartialToOstream(stream_)) {
-            throw std::invalid_argument("failed to serialize");
-        }
-        *stream_ << ":" << p.second;
+        DirectoryPB &dir = *db.add_directories();
+        *dir.mutable_path() = p.first;
+        dir.set_value(p.second);
     }
-    if (stream_->bad()) {
+    if (!db.SerializeToOstream(stream_)) {
         throw std::invalid_argument("bad stream");
     }
     return *this;
 }
 
-TableBuilder &TableBuilder::InsertItem(const Path &path, const Value &value)
+TableBuilder &TableBuilder::InsertItem(const PathPB &path, const Value &value)
 {
-    if (!path.SerializePartialToOstream(stream_)) {
-        throw std::invalid_argument("failed to serialize");
-    }
-    *stream_ << ":" << value;
-    if (stream_->bad()) {
+    DirectoryDataBasePB db;
+    DirectoryPB &dir = *db.add_directories();
+    *dir.mutable_path() = path;
+    dir.set_value(value);
+    if (!db.SerializeToOstream(stream_)) {
         throw std::invalid_argument("bad stream");
     }
     return *this;

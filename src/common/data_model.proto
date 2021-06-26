@@ -1,0 +1,15 @@
+syntax = "proto3";
+package directory_db;
+
+message PathPB {
+    repeated string parts = 1;
+}
+
+message DirectoryPB {
+    PathPB path = 1;
+    string value = 2;
+}
+
+message DirectoryDataBasePB {
+    repeated DirectoryPB directories = 1;
+}

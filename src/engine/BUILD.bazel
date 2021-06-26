@@ -1,6 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
-
 cc_library(
     name = "table_builder",
     srcs = [
@@ -9,7 +8,21 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//src/common:directory_cc_proto",
+        ":table",
+        "//src/common:data_model",
+        "@boost//:iostreams",
+    ]
+)
+
+cc_library(
+    name = "table",
+    srcs = [
+        "table.cc",
+        "table.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/common:data_model",
         "@boost//:iostreams",
     ]
 )
