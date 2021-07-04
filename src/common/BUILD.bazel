@@ -23,3 +23,32 @@ cc_library(
         ":data_model_cc_proto"
     ]
 )
+
+cc_library(
+    name = "dunder",
+    srcs = [
+        "dunder.h"
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "files",
+    srcs = glob([
+        "files/*.cc",
+        "files/*.h",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "iobuf",
+    srcs = [
+        "iobuf.cc",
+        "iobuf.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "dunder"
+    ]
+)

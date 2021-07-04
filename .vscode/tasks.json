@@ -5,7 +5,7 @@
             "id": "bazel_target",
             "description": "the build target of bazel rules",
             "type": "pickString",
-            "default": "//src/...:all",
+            "default": "//test:all",
             "options": [
                 "//test:all",
                 "//src/...:all",

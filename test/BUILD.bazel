@@ -38,3 +38,21 @@ cc_test(
         "@com_google_googletest//:gtest_main",
     ]
 )
+
+cc_test(
+    name = "file_test",
+    srcs = ["file_test.cc"],
+    deps = [
+        "//src/common:files",
+        "@com_google_googletest//:gtest_main",
+    ]
+)
+
+cc_test(
+    name = "iobuf_test",
+    srcs = ["iobuf_test.cc"],
+    deps = [
+        "//src/common:iobuf",
+        "@com_google_googletest//:gtest_main",
+    ]
+)
