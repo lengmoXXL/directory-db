@@ -15,5 +15,12 @@ std::string str(const T &instance)
     return instance.__str__();
 }
 
+template<typename T>
+typename T::Elem next(T &instance)
+{
+    return instance.__next__();
+}
+
+
 }
 } // namespace directory_db

@@ -11,7 +11,7 @@ class Path
 public:
     Path(const std::string &path);
 
-    std::string path();
+    std::string path() const;
 private:
     std::string path_;
 };

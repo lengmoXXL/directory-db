@@ -33,15 +33,6 @@ cc_library(
 )
 
 cc_library(
-    name = "files",
-    srcs = glob([
-        "files/*.cc",
-        "files/*.h",
-    ]),
-    visibility = ["//visibility:public"],
-)
-
-cc_library(
     name = "iobuf",
     srcs = [
         "iobuf.cc",
@@ -50,5 +41,18 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "dunder"
+    ]
+)
+
+cc_library(
+    name = "files",
+    srcs = glob([
+        "files/*.cc",
+        "files/*.h",
+    ]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "dunder",
+        "iobuf",
     ]
 )

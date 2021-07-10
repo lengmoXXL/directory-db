@@ -8,7 +8,7 @@ Path::Path(const std::string &path): path_(path)
 {
 }
 
-std::string Path::path()
+std::string Path::path() const
 {
     return path_;
 }

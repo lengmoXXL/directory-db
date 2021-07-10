@@ -1,44 +1,75 @@
 #include "iobuf.h"
 
 #include <algorithm>
-#include <sstream>
 
 
 namespace directory_db {
 
-void IOBuf::Append(const std::string &data)
+StringView::StringView(const std::string &s)
+    : ref_(std::make_shared<std::string>(s))
 {
-    if (blocks_.empty()) {
-        blocks_.emplace_back(new Block);
-        blocks_.back()->reserve(kBlockSize);
-    }
-
-    for (size_t pos = 0; pos < data.size(); ) {
-        Block &last = *blocks_.back();
-        size_t remaining = std::min(kBlockSize - last.size(),
-                                    data.size() - pos);
-        last.append(&data[pos], remaining);
-        pos += remaining;
-        if (last.size() == kBlockSize) {
-            blocks_.emplace_back(new Block);
-            blocks_.back()->reserve(kBlockSize);
-        }
-    }
+    limit_ = (*ref_).size();
 }
 
-size_t IOBuf::__len__() const
+StringView::StringView(const char *data)
+    : ref_(std::make_shared<std::string>(data))
 {
-    if (blocks_.empty()) {
-        return 0;
-    }
-    return kBlockSize * (blocks_.size() - 1) + blocks_.back()->size();
+    limit_ = (*ref_).size();
 }
 
-std::string IOBuf::__str__() const
+StringView::StringView(std::string &&s)
+    : ref_(std::make_shared<std::string>(std::move(s)))
+{
+    limit_ = (*ref_).size();
+}
+
+StringView StringView::slice(int64_t start, int64_t limit) const
+{
+    StringView ret(*ref_);
+    ret.start_ = start;
+    ret.limit_ = limit;
+    return ret;
+}
+
+const char* StringView::data() const
+{
+    return &(*ref_)[start_];
+}
+
+char StringView::operator[](int idx) const
+{
+    return (*ref_)[start_ + idx];
+}
+
+size_t StringView::__len__() const
+{
+    return limit_ - start_;
+}
+
+std::string StringView::__str__() const
+{
+    return (*ref_).substr(start_, limit_ - start_);
+}
+
+// IOBuf
+
+void StringBuf::Append(const std::string &data)
+{
+    buf_.emplace_back(data);
+    length_ += data.size();
+}
+
+size_t StringBuf::__len__() const
+{
+    return length_;
+}
+
+std::string StringBuf::__str__() const
 {
     std::stringstream os;
-    for (const BlockRef &ref: blocks_) {
-        os << *ref;
+    for (const StringView &view: buf_)
+    {
+        os << view;
     }
     return os.str();
 }
